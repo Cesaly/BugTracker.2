@@ -1,0 +1,82 @@
+<h1> BugTracker </h1>
+    <h2>
+        {% if not user.is_authenticated %}
+                <a href="login/">Login</a>
+                <br>
+                <a href="signup/">Sign Up</a>
+        {% elif user.is_authenticated %}
+
+        {% endif %}
+    </h2>
+
+{% if user.is_authenticated %}
+
+    <a href="newticket/">New ticket?</a>
+
+<br>
+<br>
+<h2>New Tickets:</h2>
+    {% for ticket in new %}
+
+    <h3><a href="/ticket/{{ticket.id}}">{{ ticket.title }}</a></h3>
+        <p>{{ ticket.description }}</p>
+        <p>Status: {{ticket.ticket_status}}</p>
+        <p>Working by: <a href="/authorsview/{{ticket.ticket_person.id}}">{{ ticket.ticket_person }}</a></p>
+        <p>Filed by: <a href="/authorsview/{{ticket.ticket_done_by.id}}">{{ ticket.ticket_done_by }}</a></p>
+        <p><a href="/edit/{{ticket.id}}">Edit Ticket</a></p>
+
+    {% endfor %}
+
+    <br>
+    <br>
+
+    <h2>In Progress Ticket</h2>
+        {%for ticket in inprogress%}
+            <h3><a href="/ticket/{{ticket.id}}">{{ ticket.title }}</a></h3>
+            <p>{{ ticket.description }}</p>
+            <p>Stauts: In Progress</p>
+            <p>Working by: <a href="/authorsview/{{ticket.ticket_person.id}}">{{ ticket.ticket_person }}</a></p>
+            <p>Filed by: <a href="/authorsview/{{ticket.ticket_done_by}}">{{ ticket.ticket_done_by }}</a></p>
+            <p><a href="/edit/{{ticket.id}}">Edit Ticket</a></p>
+            <a href="/invalid/{{ticket.id}}/"/><button> Make Invalid</button></a>
+            <a href="/finished/{{ticket.id}}/"><button> Mark Complete</button></a>
+        {% endfor %}
+
+        <br>
+        <br>
+        
+        <h2>Completed Tickets</h2>
+            {% for ticket in finished %}
+                <h3><a href="/ticket/{{ticket.id}}">{{ ticket.title }}</a></h3>
+                <p>{{ ticket.description }}</p>
+                <p>Status: Completed</p>
+                <p>Assigned to: {{ ticket.ticket_person }}</p>
+                <p>Filed by: <a href="/authorsview/{{ticket.ticket_person.id}}"></a></p>
+                <p>Completed by: <a href="/authorsview/{{ticket.done_by.id}}"></a></p>
+                <p><a href="/edit/{{ticket.id}}">EDIT TICKET</a></p>
+            {% endfor %}
+        
+        <br>
+        <br>  
+        
+        <h2>Invalid Tickets</h2>
+            {% for ticket in invalid %}
+            {{ticket}}
+                <h3><a href="/ticket/{{ticket.id}}">{{ ticket.title }}</a></h3>
+                <p>{{ ticket.description }}</p>
+                <p>Status: {{ticket.ticket_status}}
+                <p>Assigned to: {{ ticket.ticket_person }}</p>
+                <p>Filed by: <a href="/authorsview/{{ticket.title.id}}">{{ ticket.ticket_done_by }}</a></p>
+                <p><a href="/edit/{{ticket.id}}/">EDIT TICKET</a></p>
+                 
+        <br>
+        <br>
+        
+                
+        
+            {% endfor %}
+
+
+{% endif %}
+<a href="logout/">Logout</a>
+    

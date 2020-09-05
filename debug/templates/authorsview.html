@@ -1,0 +1,49 @@
+<h1>All Tickets :</h1>
+    {% for ticket in created_ticket %}
+
+        <h2><a href="/ticket/{{ticket.id}}/">{{ ticket.title }}</a></h2>
+        <p>{{ ticket.description }}</p>
+        {% if ticket.ticket_status == "In_progress" %}
+            <p>Status: {{ticket.ticket_status</p>
+        {% elif tickets.ticket_status == "New" %}
+            <p>Status: {{tickets.ticket_status}}</p>
+        {% elif tickets.ticket_status == "Done" %}
+            <p>Status: {{tickets.ticket_status}}</p>
+        {% endif %}
+        {% if tickets.assigned_user is not None%}
+            <p>Assigned to: <a href="/user/{{tickets.ticket_person.id}}/">{{ tickets.ticket_person }}</a></p>
+        {% else %}
+            <p>Assigned to: {{ tickets.ticket_person }}</p>
+        {% endif %}
+        <p>Created by: <a href="/user/{{tickets.ticket_person.id}}/">{{ <tickets class="ticket_person"></tickets> }}</a>
+        <p><a href="/edit/{{tickets.id}}">EDIT TICKET</a></p>
+    {% endfor %}
+<br>
+    <h1>Tickets Assigned:</h1>
+    {% for tickets in assigned_ticket %}
+
+        <h2><a href="/ticket/{{tickets.id}}/">{{ tickets.title }}</a></h2>
+        <p>{{ tickets.description }}</p>
+        {% if tickets.ticket_status == "In_progress" %}
+            <p>Status: {{tickets.ticket_status}}</p>
+        {% elif tickets.ticket_status == ""%}
+            <p>Status: {{tickets.ticket_status}}</p>
+        {% endif %}
+        <p>Assigned to:</p>
+        <p>Created by: </p>
+        <p><a href="/edit/{{tickets.id}}">EDIT TICKET</a></p>
+    {% endfor %}
+<br>
+    <h1>Tickets Completed:</h1>
+    {% for tickets in completed_ticket %}
+
+        <h2><a href="/ticket/{{tickets.id}}/">{{ tickets.title }}</a></h2>
+        <p>{{ tickets.description }}</p>
+        <p>Status: {{tickets.ticket_status}}</p>
+        <p>Assigned to: {{ tickets.ticket_person }}</p>
+        <p>Created by: <a href="/user/{{tickets.ticket_person.id}}/"></a></p>
+        <p>Finished By: <a href="/user/{{tickets.done_by.id}}/"></a></p>
+        <p><a href="/edit/{{tickets.ticket_id}}">EDIT TICKET</a></p>
+    {% endfor %}
+<br>
+<a href="/">GO HOME</a>
